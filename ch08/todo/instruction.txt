@@ -20,3 +20,12 @@ $ vi serverless.ts
 # Start local dynamodb
 # It should show "Dynamodb Local Started, Visit: http://localhost:8000/shell"
 $ sls dynamodb start
+
+# Install serverless-offline plugin
+$ npm install --save-dev serverless-offline
+
+# Add serverless-offline plugin in serverless.ts
+$ vi serverless.ts
+
+# Start serverless-offline, serverless-dynamodb-local
+$ sls offline start
