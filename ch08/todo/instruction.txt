@@ -1,2 +1,15 @@
 $ serverless create --template aws-nodejs-typescript
 $ npm install
+
+# Install serverless-dynamodb-local plugin
+$ npm install --save-dev serverless-dynamodb-local
+$ serverless plugin install --name serverless-dynamodb-local
+
+# Add serverless-dynamodb-local plugin in serverless.ts(there is no serverless.yml)
+$ vi serverless.ts
+
+# check whether it's installed
+$ sls help
+
+# Install local dynamodb
+$ sls dynamodb install
