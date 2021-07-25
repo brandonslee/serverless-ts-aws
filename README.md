@@ -1,1 +1,2 @@
-# serverless-ts-aws
+# 타입스크립트, AWS 서버리스로 들어올리다
+실습
