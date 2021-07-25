@@ -1,1 +1,2 @@
 $ serverless create --template aws-nodejs-typescript
+$ npm install
