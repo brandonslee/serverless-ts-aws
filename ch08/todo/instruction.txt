@@ -13,3 +13,10 @@ $ sls help
 
 # Install local dynamodb
 $ sls dynamodb install
+
+# Add stages: 'dev' in serverless.ts
+$ vi serverless.ts
+
+# Start local dynamodb
+# It should show "Dynamodb Local Started, Visit: http://localhost:8000/shell"
+$ sls dynamodb start

@@ -10,6 +10,9 @@ const serverlessConfiguration: AWS = {
       webpackConfig: './webpack.config.js',
       includeModules: true,
     },
+    dynamodb: {
+      stages: 'dev'
+    },
   },
   plugins: ['serverless-webpack', 'serverless-dynamodb-local'],
   provider: {
