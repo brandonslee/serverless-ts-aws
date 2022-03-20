@@ -89,6 +89,18 @@ functions:
       - httpApi:
           method: get
           path: /todo/{id}
+  TodoUpdate:
+    handler: src/todo/update.update
+    events:
+      - httpApi:
+          method: patch
+          path: /todo
+  TodoList:
+    handler: src/todo/list.list
+    events:
+      - httpApi:
+          method: get
+          path: /todos
   hello:
     handler: handler.hello
 #    The following are a few example events you can configure
