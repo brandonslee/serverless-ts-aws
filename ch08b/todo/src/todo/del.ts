@@ -6,30 +6,26 @@ import {
 } from "aws-lambda";
 import { response } from "../common/helper";
 import { dynamodb, TABLE_TODOS } from "../database/dynamodb";
-import HttpStatusCode from "../common/httpStatusCode";
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
+import HttpStatusCode from "../common/httpStatusCode";
 
-export const list: Handler = async (
+
+export const del: Handler = async (
     event: APIGatewayProxyEvent,
     _context: Context
 ): Promise<APIGatewayProxyResult> => {
-    const q = event.queryStringParameters? event.queryStringParameters.q:null;
-    const params: DocumentClient.ScanInput = {
+    const id = event.pathParameters? event.pathParameters.id:'{}';
+    
+    const params: DocumentClient.DeleteItemInput = {
         TableName: TABLE_TODOS,
-        FilterExpression: "deletedAt = :val",
-        ExpressionAttributeValues: {
-            ":val": -1
+        Key: {
+            id: id
         }
     };
 
-    if (q) {
-        params.FilterExpression += " and contains(task, :q)";
-        params.ExpressionAttributeValues = { ":q": q, ...params.ExpressionAttributeValues }
-    }
-
-    let data: DocumentClient.ScanOutput;
+    let data: DocumentClient.DeleteItemOutput;
     try {
-        data = await dynamodb.scan(params).promise();
+        data = await dynamodb.delete(params).promise();
     } catch (e: any) {
         return response(HttpStatusCode.INTERNAL_SERVER_ERROR, {
             result: false,
@@ -38,7 +34,8 @@ export const list: Handler = async (
     }
 
     return response(HttpStatusCode.OK, {
-        result: true,
+        result: !data.ConsumedCapacity? true: false,
+        message: !data.ConsumedCapacity? "완료": "해당 아이디를 찾을 수 없습니다.",
         data
     });
 };

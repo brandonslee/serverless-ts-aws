@@ -101,6 +101,12 @@ functions:
       - httpApi:
           method: get
           path: /todos
+  TodoDelete:
+    handler: src/todo/del.del
+    events:
+      - httpApi:
+          method: delete
+          path: /todo/{id}
   hello:
     handler: handler.hello
 #    The following are a few example events you can configure
